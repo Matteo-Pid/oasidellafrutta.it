@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Oasi della Frutta - Nicosia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #3a6b35;
+    --verde-chiaro: #6aaa5e;
+    --terra: #c4783b;
+    --panna: #fdf6ec;
+    --marrone: #5c3d2e;
+    --giallo: #f5c842;
+    --testo: #2d2d2d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--panna);
+    color: var(--testo);
+    overflow-x: hidden;
+  }
+
+  /* ---- HEADER ---- */
+  header {
+    background: var(--verde);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--panna);
+    font-size: 1.1rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  nav a {
+    color: #d4edc8;
+    text-decoration: none;
+    margin-left: 1.2rem;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { color: var(--giallo); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--panna);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    background: var(--verde);
+    padding: 1rem 2rem 1.5rem;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    color: #d4edc8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--giallo); }
+
+  @media (max-width: 680px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+  }
+  nav a:hover { color: var(--giallo); }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 92vh;
+    background:
+      radial-gradient(ellipse at 70% 40%, rgba(106,170,94,0.22) 0%, transparent 65%),
+      radial-gradient(ellipse at 20% 80%, rgba(196,120,59,0.15) 0%, transparent 55%),
+      var(--panna);
+    display: flex;
+    align-items: center;
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(106,170,94,0.18), transparent 70%);
+  }
+
+  .hero-content {
+    max-width: 580px;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--terra);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    line-height: 1.13;
+    color: var(--marrone);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero h1 em {
+    color: var(--verde);
+    font-style: italic;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #5a4a3a;
+    line-height: 1.8;
+    margin-bottom: 2.2rem;
+    max-width: 460px;
+    font-weight: 300;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--verde);
+    color: #fff;
+    padding: 0.85rem 2.2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 16px rgba(58,107,53,0.22);
+    text-align: center;
+  }
+  .btn:hover { background: var(--verde-chiaro); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--terra);
+    color: var(--terra);
+    box-shadow: none;
+  }
+  .btn-outline:hover { background: var(--terra); color: #fff; transform: translateY(-2px); }
+
+  .hero-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  @media (min-width: 480px) {
+    .hero-btns { flex-direction: row; align-items: center; }
+  }
+
+  .hero-fruits {
+    position: absolute;
+    right: 4vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: clamp(6rem, 14vw, 11rem);
+    line-height: 1.1;
+    text-align: center;
+    opacity: 0.85;
+    animation: float 4s ease-in-out infinite;
+    user-select: none;
+  }
+
+  /* ---- CHI SIAMO ---- */
+  section { padding: 5rem 2rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--terra);
+    margin-bottom: 0.7rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--marrone);
+    line-height: 1.25;
+    margin-bottom: 1.5rem;
+  }
+
+  #chi-siamo {
+    background: #fff;
+    border-top: 5px solid var(--verde-chiaro);
+  }
+
+  .chi-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .chi-inner p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #4a3d30;
+    font-weight: 300;
+  }
+
+  .valori {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+  }
+
+  .valore {
+    text-align: center;
+    max-width: 160px;
+    animation: fadeUp 0.7s ease both;
+  }
+
+  .valore-emoji {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .valore strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--verde);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+  }
+
+  .valore span {
+    font-size: 0.85rem;
+    color: #7a6a5a;
+    line-height: 1.5;
+  }
+
+  /* ---- STAGIONALE ---- */
+  #stagionale {
+    background: var(--panna);
+  }
+
+  .stagionale-inner { max-width: 900px; margin: 0 auto; }
+
+  .stagionale-inner .section-title { text-align: center; }
+  .stagionale-inner .section-label { text-align: center; }
+
+  .stagioni-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: #e8ddd0;
+    border: none;
+    padding: 0.55rem 1.5rem;
+    border-radius: 2rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--marrone);
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--verde);
+    color: #fff;
+  }
+
+  .prodotti-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .prodotto-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.4rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+
+  .prodotto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(58,107,53,0.13);
+    border-bottom-color: var(--verde-chiaro);
+  }
+
+  .prodotto-emoji { font-size: 2.4rem; display: block; margin-bottom: 0.5rem; }
+  .prodotto-nome { font-size: 0.88rem; font-weight: 700; color: var(--marrone); }
+
+  .stagione-section { display: none; }
+  .stagione-section.active { display: block; }
+
+  /* ---- CONTATTI ---- */
+  #contatti {
+    background: var(--verde);
+    color: var(--panna);
+  }
+
+  .contatti-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  #contatti .section-label { color: var(--giallo); }
+  #contatti .section-title { color: #fff; }
+
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .info-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .info-text strong {
+    display: block;
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--giallo);
+    margin-bottom: 0.2rem;
+  }
+
+  .info-text span {
+    font-size: 1rem;
+    color: #d4edc8;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .orari-box {
+    background: rgba(255,255,255,0.1);
+    border-radius: 1rem;
+    padding: 1.8rem;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .orari-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+
+  .orario-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #c8e6bf;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .orario-row:last-child { border-bottom: none; }
+  .orario-row .giorno { font-weight: 700; color: #fff; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--marrone);
+    color: #c8b8a5;
+    text-align: center;
+    padding: 1.8rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  footer strong { color: var(--panna); }
+
+  /* ---- ANIMAZIONI ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) rotate(-2deg); }
+    50%       { transform: translateY(calc(-50% - 14px)) rotate(2deg); }
+  }
+
+  /* ---- FORM WHATSAPP ---- */
+  #richiesta {
+    background: #fff;
+    border-top: 5px solid var(--terra);
+  }
+
+  .form-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-inner .section-title { margin-bottom: 0.5rem; }
+  .form-intro {
+    font-size: 1rem;
+    color: #6a5a4a;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--marrone);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    border: 1.5px solid #ddd;
+    border-radius: 0.6rem;
+    padding: 0.75rem 1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.95rem;
+    color: var(--testo);
+    background: var(--panna);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--verde);
+    background: #fff;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    width: 100%;
+    background: #25d366;
+    color: #fff;
+    border: none;
+    border-radius: 0.8rem;
+    padding: 1rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
+
+  .btn-whatsapp svg { flex-shrink: 0; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 680px) {
+    .hero-fruits { display: none; }
+    .contatti-inner { grid-template-columns: 1fr; gap: 2rem; }
+    nav a { margin-left: 1rem; font-size: 0.8rem; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">L'Oasi della Frutta di Zuccarello Alessandro</div>
+  <nav>
+    <a href="#chi-siamo">Chi siamo</a>
+    <a href="#stagionale">Stagione</a>
+    <a href="#contatti">Contatti</a>
+    <a href="#richiesta">WhatsApp</a>
+  </nav>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#chi-siamo" onclick="chiudiMenu()">Chi siamo</a>
+  <a href="#stagionale" onclick="chiudiMenu()">Stagione</a>
+  <a href="#contatti" onclick="chiudiMenu()">Contatti</a>
+  <a href="#richiesta" onclick="chiudiMenu()">WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">🌿 Fresco ogni giorno</span>
+    <h1>La natura<br>nel cuore di <em>Nicosia</em></h1>
+    <p>Frutta e verdura di stagione, selezionate con cura e passione per portare sulla tua tavola il meglio che la terra offre. Come una volta, con il sorriso di sempre.</p>
+    <div class="hero-btns">
+      <a href="#stagionale" class="btn">Cosa c'è di stagione</a>
+      <a href="#contatti" class="btn btn-outline">Vieni a trovarci</a>
+    </div>
+  </div>
+  <div class="hero-fruits">🍊<br>🍅<br>🍇</div>
+</section>
+
+<!-- CHI SIAMO -->
+<section id="chi-siamo">
+  <div class="chi-inner">
+    <div class="section-label">Chi siamo</div>
+    <h2 class="section-title">Un angolo di freschezza<br>nel tuo quartiere</h2>
+    <p>
+      L'Oasi della Frutta è il negozio dove ogni mattina il profumo di frutta matura e verdure fresche ti accoglie come a casa. Siamo un punto di riferimento per chi ama mangiare bene oramai da anni, scegliendo prodotti genuini, locali quando possibile, e sempre selezionati con attenzione per la qualità. La nostra missione è semplice: portare ogni giorno il meglio della stagione direttamente nelle tue mani.
+    </p>
+    <div class="valori">
+      <div class="valore">
+        <span class="valore-emoji">🌱</span>
+        <strong>Freschezza</strong>
+        <span>Prodotti riforniti ogni giorno di prima mattina</span>
+      </div>
+      <div class="valore">
+        <span class="valore-emoji">🤝</span>
+        <strong>Fiducia</strong>
+        <span>Rapporto diretto e onesto con ogni cliente</span>
+      </div>
+      <div class="valore">
+        <span class="valore-emoji">🏡</span>
+        <strong>Famiglia</strong>
+        <span>Un negozio a misura di persona, non di supermercato</span>
+      </div>
+      <div class="valore">
+        <span class="valore-emoji">🌍</span>
+        <strong>Stagionalità</strong>
+        <span>Rispettiamo i ritmi della natura, del territorio e non buttiamo via nulla</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAGIONALE -->
+<section id="stagionale">
+  <div class="stagionale-inner">
+    <div class="section-label">Cosa portiamo</div>
+    <h2 class="section-title">I prodotti di stagione</h2>
+
+    <div class="stagioni-tabs">
+      <button class="tab-btn active" onclick="mostraStagione('primavera', this)">🌸 Primavera</button>
+      <button class="tab-btn" onclick="mostraStagione('estate', this)">☀️ Estate</button>
+      <button class="tab-btn" onclick="mostraStagione('autunno', this)">🍂 Autunno</button>
+      <button class="tab-btn" onclick="mostraStagione('inverno', this)">❄️ Inverno</button>
+    </div>
+
+    <!-- PRIMAVERA -->
+    <div class="stagione-section active" id="stagione-primavera">
+      <div class="prodotti-grid">
+        <div class="prodotto-card"><span class="prodotto-emoji">🍓</span><span class="prodotto-nome">Fragole</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🫐</span><span class="prodotto-nome">Mirtilli</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍒</span><span class="prodotto-nome">Ciliegie</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥬</span><span class="prodotto-nome">Lattuga</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🌿</span><span class="prodotto-nome">Asparagi</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥦</span><span class="prodotto-nome">Broccoli</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🫛</span><span class="prodotto-nome">Piselli</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥕</span><span class="prodotto-nome">Carote</span></div>
+      </div>
+    </div>
+
+    <!-- ESTATE -->
+    <div class="stagione-section" id="stagione-estate">
+      <div class="prodotti-grid">
+        <div class="prodotto-card"><span class="prodotto-emoji">🍉</span><span class="prodotto-nome">Cocomero</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍑</span><span class="prodotto-nome">Pesche</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍅</span><span class="prodotto-nome">Pomodori</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥒</span><span class="prodotto-nome">Zucchine</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍆</span><span class="prodotto-nome">Melanzane</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🌽</span><span class="prodotto-nome">Mais</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍇</span><span class="prodotto-nome">Uva</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥭</span><span class="prodotto-nome">Melone</span></div>
+      </div>
+    </div>
+
+    <!-- AUTUNNO -->
+    <div class="stagione-section" id="stagione-autunno">
+      <div class="prodotti-grid">
+        <div class="prodotto-card"><span class="prodotto-emoji">🍎</span><span class="prodotto-nome">Mele</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍐</span><span class="prodotto-nome">Pere</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍁</span><span class="prodotto-nome">Castagne</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🎃</span><span class="prodotto-nome">Zucca</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥝</span><span class="prodotto-nome">Kiwi</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🧅</span><span class="prodotto-nome">Cipolle</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🫒</span><span class="prodotto-nome">Olive</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥦</span><span class="prodotto-nome">Cavolfiore</span></div>
+      </div>
+    </div>
+
+    <!-- INVERNO -->
+    <div class="stagione-section" id="stagione-inverno">
+      <div class="prodotti-grid">
+        <div class="prodotto-card"><span class="prodotto-emoji">🍊</span><span class="prodotto-nome">Arance</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🍋</span><span class="prodotto-nome">Limoni</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🫒</span><span class="prodotto-nome">Clementine</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥬</span><span class="prodotto-nome">Verza</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🧄</span><span class="prodotto-nome">Aglio</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🫚</span><span class="prodotto-nome">Finocchi</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🌰</span><span class="prodotto-nome">Noci</span></div>
+        <div class="prodotto-card"><span class="prodotto-emoji">🥕</span><span class="prodotto-nome">Barbabietole</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTATTI -->
+<section id="contatti">
+  <div class="contatti-inner">
+    <div>
+      <div class="section-label">Dove siamo</div>
+      <h2 class="section-title">Vieni a trovarci</h2>
+
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <div class="info-text">
+          <strong>Indirizzo</strong>
+          <span>Via Bartolomeo Provenzale, <br>94014 Nicosia (EN)</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">📞</span>
+        <div class="info-text">
+          <strong>Telefono</strong>
+          <span>+39 376 087 8755</span>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <span class="info-icon">✉️</span>
+        <div class="info-text">
+          <strong>Email</strong>
+          <span>info@l-oasi-della-frutta.it</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="orari-box">
+      <h3>🕐 Orari di apertura</h3>
+      <div class="orario-row"><span class="giorno">Lunedì – Venerdì</span><span>08:00 – 13:00<br>16:00 – 20:00</span></div>
+      <div class="orario-row"><span class="giorno">Sabato</span><span>08:00 – 16:00</span></div>
+      <div class="orario-row"><span class="giorno">Domenica</span><span>Chiuso</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM WHATSAPP -->
+<section id="richiesta">
+  <div class="form-inner">
+    <div class="section-label">Scrivici</div>
+    <h2 class="section-title">Mandaci un messaggio</h2>
+    <p class="form-intro">Hai bisogno di un prodotto specifico? Vuoi prenotare qualcosa per farlo mettere da parte? Scrivici direttamente su WhatsApp!</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" placeholder="Mario">
+      </div>
+      <div class="form-group">
+        <label for="cognome">Cognome</label>
+        <input type="text" id="cognome" placeholder="Rossi">
+      </div>
+      <div class="form-group">
+        <label for="email">Email (opzionale)</label>
+        <input type="email" id="email" placeholder="mario@email.it">
+      </div>
+      <div class="form-group">
+        <label for="telefono">Telefono</label>
+        <input type="tel" id="telefono" placeholder="+39 333 000 0000">
+      </div>
+      <div class="form-group full">
+        <label for="tipo">Tipo di richiesta</label>
+        <select id="tipo">
+          <option value="">Seleziona...</option>
+          <option value="Prenotazione cassetta">🧺 Prenotazione cassetta</option>
+          <option value="Disponibilità prodotto">🔍 Disponibilità prodotto</option>
+          <option value="Ordine personalizzato">📦 Ordine personalizzato</option>
+          <option value="Informazioni generali">💬 Informazioni generali</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="messaggio">Il tuo messaggio</label>
+        <textarea id="messaggio" placeholder="Descrivi la tua richiesta, i prodotti che cerchi, la quantità..."></textarea>
+      </div>
+    </div>
+
+    <button class="btn-whatsapp" onclick="inviaWhatsApp()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+      </svg>
+      Invia su WhatsApp →
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 <strong>L'Oasi della Frutta</strong> · Via Bartolomeo Provenzale, 16/p.t · 94014 Nicosia (EN)</p>
+  <p style="margin-top:0.4rem; font-size:0.8rem; opacity:0.6;">Freschezza ogni giorno, con amore 🍊</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function chiudiMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  function inviaWhatsApp() {
+    const nome = document.getElementById('nome').value.trim();
+    const cognome = document.getElementById('cognome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const tipo = document.getElementById('tipo').value;
+    const messaggio = document.getElementById('messaggio').value.trim();
+
+    let testo = `Ciao! Sono ${nome} ${cognome}`.trim();
+    if (email) testo += `\nEmail: ${email}`;
+    if (telefono) testo += `\nTelefono: ${telefono}`;
+    if (tipo) testo += `\nRichiesta: ${tipo}`;
+    if (messaggio) testo += `\n\n${messaggio}`;
+
+    // Sostituisci con il tuo numero WhatsApp (solo cifre, con prefisso internazionale)
+    const numeroWA = '+39 376 087 8755';
+    const url = `https://wa.me/${numeroWA}?text=${encodeURIComponent(testo)}`;
+    window.open(url, '_blank');
+  }
+
+  function mostraStagione(stagione, btn) {
+    document.querySelectorAll('.stagione-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('stagione-' + stagione).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Imposta tab stagione corrente automaticamente
+  const mese = new Date().getMonth();
+  const mappa = {
+    primavera: [2,3,4],
+    estate: [5,6,7],
+    autunno: [8,9,10],
+    inverno: [11,0,1]
+  };
+  for (const [stagione, mesi] of Object.entries(mappa)) {
+    if (mesi.includes(mese)) {
+      const btn = [...document.querySelectorAll('.tab-btn')].find(b => b.textContent.toLowerCase().includes(stagione));
+      if (btn) mostraStagione(stagione, btn);
+      break;
+    }
+  }
+</script>
+
+</body>
+</html>
